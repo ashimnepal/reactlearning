@@ -111,6 +111,7 @@ function HomeHero(){
             </a>
         </div>
     </div>
+    <h1>This is to check the push</h1>
 </section>
 
         </React.Fragment>
