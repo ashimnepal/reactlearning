@@ -3,7 +3,7 @@ import HomeNav from "../components/HomeNav";
 import HomeSlider from "../components/HomeSlider";
 import HomeHero from "../components/HeroSection";
 
-function HomePage(){
+function HomePage({price}){
     return(
         <React.Fragment>            
             <HomeNav/>
