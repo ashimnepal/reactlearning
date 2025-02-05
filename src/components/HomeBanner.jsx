@@ -1,8 +1,9 @@
+// HomeBanner.js
 import React, { useEffect, useState } from "react";
 import HomeSlider from "./HomeSlider";
 
 function HomeBanner() {
-    const images = [
+    const imagesList = [
         "https://flowbite.com/docs/images/carousel/carousel-1.svg",
         "https://flowbite.com/docs/images/carousel/carousel-2.svg",
         "https://flowbite.com/docs/images/carousel/carousel-3.svg",
@@ -10,10 +11,14 @@ function HomeBanner() {
         "https://flowbite.com/docs/images/carousel/carousel-5.svg"
     ];
 
+    const [images, setImages] = useState([]);
+
+    useEffect(() => setImages(imagesList), [])
+
     return (
         <>
             {
-            images ? <HomeSlider data={images} /> : <></>
+                images ? <HomeSlider data={images} /> : <></>
             }
         </>
     );
