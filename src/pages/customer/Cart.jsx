@@ -1,12 +1,12 @@
 import React from "react";
 import HomeNav from "../../components/HomeNav";
 
-function LoginPage(){
+function Cart(){
     return(
         <React.Fragment>
             <HomeNav></HomeNav>
-            <h1>Login Page</h1>
+            <h1>Cart Products</h1>
         </React.Fragment>
     )
 }
-export default LoginPage;
+export default Cart;
