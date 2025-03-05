@@ -3,16 +3,16 @@ import 'flowbite';
 import { Carousel } from "flowbite-react";
 
 function HomeSlider({data}) { 
-    let images=data
-    console.log(data)
+    let image=data
+    
     return (
-        images ? 
+        image ? 
         <>
 
             <Carousel className="rounded-none h-[650px] w-full">
                 {
-                    data.map((row,index)=> (
-                        <img key={row} className="rounded-none" src={data[index]} alt="carousel-1" />
+                    image.map((row,index)=> (
+                        <img key={row} className="rounded-none" src={image[index]} alt="carousel-1" />
                     ))
                 }
                 

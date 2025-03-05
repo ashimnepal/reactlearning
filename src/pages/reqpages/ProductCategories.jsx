@@ -1,11 +1,16 @@
 import React from "react";
-import HomeNav from "../../components/HomeNav";
+
+import { useParams, useSearchParams } from "react-router-dom";
 
 function ProductCategories(){
+    const params = useParams();
+    const [query,setQuery]=useSearchParams();
     return(
         <React.Fragment>
-            <HomeNav></HomeNav>
-            <h1>Product Categories</h1>
+            
+            <h1>Product Categories {params.slug} </h1>
+            <h1>Query Value: {query.get("search")} </h1>
+            
         </React.Fragment>
     )
 }
