@@ -1,9 +1,14 @@
 import React from "react";
 import { useState } from "react";
-
+import { useForm } from "react-hook-form";
+import {TextInputComponent, InputLabelComponent, SelectOptionComponent, SelectRadioComponent, TextAreaComponent} from "../../components/form/input.component";
 
 function RegisterPage() {
-    const[data, setData] = useState();
+   const {control, handleSubmit, formState:{errors}} = useForm();
+
+   const submitEvent = (data) => {
+    console.log("Data",data);
+   }
     return (
         <React.Fragment>
 
@@ -15,71 +20,66 @@ function RegisterPage() {
                                 Create an account
                             </h1>
 
-                            <form className="space-y-4 md:space-y-6" action="#">
+                            <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit(submitEvent)}>
                                 <div>
-                                    <label htmlFor="fullName" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Full Name</label>
-                                    <input type="text" name="fullName" id="fullName"
-                                    onChange={(e) => {
-                                        const {value, name, type} = e.target;
-                                        console.log(value, name, type);
-                                    }} 
-                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-teal-600 focus:border-teal-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    placeholder="Full Name" required=""
-                                    
-                                    />
-                                    
-                                       
-                                    
+                                    <InputLabelComponent htmlFor="fullName" label="Full Name" />
+                                    <TextInputComponent name={"fullName"} placeholder={"Enter Your Full Name"} id="fullName" control={control} />             
                                 </div>
                                 
                                 <div>
-                                    <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
-                                    <input type="email" name="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-teal-600 focus:border-teal-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Email" required="" />
+                                   <InputLabelComponent htmlFor="email" label="Email" />
+                                   <TextInputComponent name= {"email"} placeholder={"Enter your email"} id="email" control={control} />
                                 </div>
 
                                 <div className="grid grid-cols-6 md:grid-cols-2 gap-4">
                                     <div>
-                                        <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
-                                        <input type="password" name="password" id="password" placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-teal-600 focus:border-teal-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" />
+                                        <InputLabelComponent htmlFor="password" label="Password" />
+                                        <TextInputComponent type="password" control={control} name="password" id="password" placeholder="••••••••" />
                                     </div>
                                     <div>
-                                        <label htmlFor="confirm-password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Confirm password</label>
-                                        <input type="confirm-password" name="confirm-password" id="confirm-password" placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-teal-600 focus:border-teal-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" />
+                                        <InputLabelComponent htmlFor="confirm-password" label="Confirm password" />
+                                        <TextInputComponent type="password" control={control} name="confirm-password" id="confirm-password" placeholder="••••••••" />
                                     </div>
                                 </div>
                                 
                                 <div>
-                                    <label htmlFor="role" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Role</label>
-                                    <select name="role" id="role" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-teal-600 focus:border-teal-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                        <option value="">--Select Role--</option>
-                                        <option value="customer">Buyer</option>
-                                        <option value="seller">Seller</option>
-                                    </select>
+                                    <InputLabelComponent htmlFor="role" label="Role" />
+                                    <SelectOptionComponent 
+                                    control = {control}
+                                    name = {'role'}
+                                    options = {[
+                                        {label: "Buyer", value: "Customer"},
+                                        {label: "Seller", value: "Seller"}
+                                    ]}
+                                    />
                                 </div>
-                                    <div>
-                                        <label htmlFor="gender" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Gender</label>
-                                        <div className="flex items-center gap-2 text-white">
-                                        <input type="radio" name="gender" id="gender" value={"male"} />
-                                        <label htmlFor="male">Male</label>
-                                        <input type="radio" name="gender" id="gender" value={"female"} />
-                                        <label htmlFor="female">Female</label>
-                                        <input type="radio" name="gender" id="gender" value={"others"} />
-                                        <label htmlFor="others">Others</label>
-                                    </div>
-                                    </div>
+
+                                <div>
+                                        <InputLabelComponent htmlFor="gender" label="Gender" />
+                                        <SelectRadioComponent
+                                        control = {control}
+                                        name = {"gender"}
+                                        options = {[
+                                            {label: "Male", value: "Male"},
+                                            {label: "Female", value: "Female"},
+                                            {label: "Others", value: "Others"}
+                                        ]}
+                                        />
+                                </div>
 
 
 
 
                                 <div>
-                                    <label htmlFor="tel" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Telephone</label>
-                                    <input type="tel" name="tel" id="tel" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-teal-600 focus:border-teal-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Telephone" required="" />
+                                    <InputLabelComponent htmlFor="tel" label="Telephone" />
+                                    <TextInputComponent type="tel" control={control} name="tel" id="tel" placeholder="Enter your telephone" />
                                 </div>
-                                
-                                <textarea name="address" id="address" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-teal-600 focus:border-teal-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Address" required="" rows={5} style={{resize:"none"}} ></textarea>
-
+                                    <InputLabelComponent htmlFor="address" label="Address" />
+                                <div className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-teal-600 focus:border-teal-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    <TextAreaComponent control={control} name="address" type="text" placeholder="Enter your address"/>
+                                </div>
                                 <div>
-                                    <label htmlFor="Image" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Upload Profile Picture</label>
+                                    <InputLabelComponent htmlFor="Image" label="Upload Profile Picture" />
                                     <input type="file" name="Image" id="Image" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-teal-600 focus:border-teal-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" />
                                 </div>
 
